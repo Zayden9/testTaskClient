@@ -21,13 +21,23 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     socket->connectToHost("127.0.0.1", 5555);
+    if (socket->isOpen())
+    {
+        QJsonDocument json;
+        QJsonObject jsonObject;
+        jsonObject.insert("info", "dai");
+        json.setObject(jsonObject);
+        socket->write(json.toJson(QJsonDocument::Compact));
+    }
 }
 
 void MainWindow::socketReady()
 {
-    data = socket->readAll();
+    QJsonDocument json = QJsonDocument::fromJson(socket->readAll());
+    QJsonObject jsonObject;
 
-    qDebug() << data;
+
+    qDebug() << json;
 }
 
 void MainWindow::socketDisconnected()

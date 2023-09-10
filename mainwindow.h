@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QTcpSocket>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,7 +19,6 @@ public:
     ~MainWindow();
 
     QTcpSocket* socket;
-    QByteArray data;
 public slots:
     void socketReady();
     void socketDisconnected();
