@@ -7,6 +7,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QTreeWidget>
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,10 +22,13 @@ public:
     ~MainWindow();
 
     QTcpSocket* socket;
+    QTimer* timer;
     void jsonToTable(QJsonDocument* json, QTreeWidget* treeWidget);
 public slots:
     void socketReady();
     void socketDisconnected();
+    void socketStateChanged(QAbstractSocket::SocketState state);
+    void oneMinute();
 
 private slots:
     void on_pushButton_clicked();
