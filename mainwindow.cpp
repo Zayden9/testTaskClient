@@ -21,7 +21,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
 void MainWindow::on_pushButton_clicked()
 {
     if (socket->state() != QAbstractSocket::ConnectedState)
@@ -43,7 +42,6 @@ void MainWindow::socketReady()
 void MainWindow::socketDisconnected()
 {
     qDebug() << "disconnected";
-    socket->deleteLater();
 }
 
 void MainWindow::socketStateChanged(QAbstractSocket::SocketState state)
@@ -59,7 +57,6 @@ void MainWindow::socketStateChanged(QAbstractSocket::SocketState state)
         case QAbstractSocket::ListeningState: s = "Только для внутреннего использования"; break;
         case QAbstractSocket::ClosingState: s = "Сокет вот-вот закроется (возможно, данные все еще ожидают записи)"; break;
     }
-
     ui->label->setText((QString)"Статус: " + s);
     ui->label_2->setText((socket->error() == QAbstractSocket::UnknownSocketError) ? "" : (QString)"Ошибка: " + socket->errorString());
     if (state == QAbstractSocket::ConnectedState)
@@ -128,4 +125,3 @@ void MainWindow::jsonToTable(QJsonDocument* json, QTreeWidget* treeWidget)
         }
     }
 }
-
