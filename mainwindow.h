@@ -5,6 +5,8 @@
 #include <QTcpSocket>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QJsonArray>
+#include <QTreeWidget>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,6 +21,7 @@ public:
     ~MainWindow();
 
     QTcpSocket* socket;
+    void jsonToTable(QJsonDocument* json, QTreeWidget* treeWidget);
 public slots:
     void socketReady();
     void socketDisconnected();
